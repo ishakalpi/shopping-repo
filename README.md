@@ -1,2 +1,2 @@
 # shopping-repo
-dgxhxxchxcghh 
+first you all need to install node js and visual studio code 
