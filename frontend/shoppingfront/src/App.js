@@ -1,8 +1,9 @@
 import './App.css';
-import {BrowserRouter ,Route, Routes } from "react-router-dom"
+import {BrowserRouter ,Route, Routes ,Navigate} from "react-router-dom"
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
 import Home from "./components/Home";
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
       <NavBar/>
       <Routes>
         <Route path="/cart" Component={Cart}/>
+        <Route path="/not-found" Component={NotFound }/>
         <Route path="/" Component={Home}/>
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
       </BrowserRouter>
     </div>
