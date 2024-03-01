@@ -1,11 +1,17 @@
+import { UseDispatch, useDispatch } from "react-redux";
 import { useGetAllProductsQuery } from "../features/productsApi";
+import { addToCart } from "../features/cartSlice";
 
 const Home = () => {
     const {data, error , isLoading} = useGetAllProductsQuery()
-    console.log("data:", data);
-    console.log("error:", error);
-    console.log("isLoading:", isLoading);
+    const dispatch = useDispatch();
+    // console.log("data:", data);
+    // console.log("error:", error);
+    // console.log("isLoading:", isLoading);
 
+const handleAddTocart = (product) => {
+    dispatch(addToCart(product));
+}
     return ( 
     <div className="home-container">
     {isLoading ? 
@@ -26,7 +32,9 @@ const Home = () => {
             <div className="detail"></div>
             <span>{product.desc}</span>
             <span className="price">${product.price}</span>
-            <button> Add to Cart </button>
+            <button onClick={() => handleAddTocart(product)}>
+                Add to Cart
+            </button>
         </div>)}
      </div>
      </>
