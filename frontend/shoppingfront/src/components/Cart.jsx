@@ -1,9 +1,18 @@
-import { UseSelector, useSelector } from "react-redux";
+import { UseSelector, useDispatch, useSelector } from "react-redux";
 import {Link } from "react-router-dom";
+import { decreaseCart, removeFromCart } from "../features/cartSlice";
 
 
 const Cart = () => {
     const cart = useSelector((state) => state.cart);
+    const dispatch = useDispatch()
+
+    const handleRemoveFromCart = (cartItem) => {
+        dispatch(removeFromCart(cartItem));
+    }
+    const handleDecreaseCart = (cartItem) => {
+        dispatch(decreaseCart(cartItem));
+    }
     return (
         <div className="cart-container">
             <h2>Shopping Cart</h2>
@@ -43,12 +52,12 @@ const Cart = () => {
                             <div>
                             <h3>{cartItem.name}</h3>
                             <p>{cartItem.desc}</p>
-                            <button>Remove</button>
+                            <button onClick={() => handleRemoveFromCart(cartItem)}>Remove</button>
                             </div>
                         </div>
                         <div className="cart-product-price">${cartItem.price}</div>
                         <div className="cart-product-quantity">
-                            <button>-</button>
+                            <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
                             <div className="count">{cartItem.cartQuantity}</div>
                             <button>+</button>
                         </div>
@@ -81,7 +90,7 @@ const Cart = () => {
                          .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
                         </svg>
                             <span>Continue Shopping</span>
-                        </Link>
+                        </Link> 
                     </div>
                 </div>
             </div>
