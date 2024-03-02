@@ -1,6 +1,6 @@
 import { UseSelector, useDispatch, useSelector } from "react-redux";
 import {Link } from "react-router-dom";
-import { decreaseCart, removeFromCart } from "../features/cartSlice";
+import { addToCart, clearCart, decreaseCart, increaseCart, removeFromCart } from "../features/cartSlice";
 
 
 const Cart = () => {
@@ -12,6 +12,13 @@ const Cart = () => {
     }
     const handleDecreaseCart = (cartItem) => {
         dispatch(decreaseCart(cartItem));
+    }
+    const handleIncreaseCart = (cartItem) => {
+        dispatch(addToCart(cartItem));
+    }
+
+    const handleClearCart = () => {
+        dispatch(clearCart());
     }
     return (
         <div className="cart-container">
@@ -59,7 +66,7 @@ const Cart = () => {
                         <div className="cart-product-quantity">
                             <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
                             <div className="count">{cartItem.cartQuantity}</div>
-                            <button>+</button>
+                            <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
                         </div>
                         <div className="cart-product-total-price">
                             ${cartItem.price * cartItem.cartQuantity}
@@ -68,7 +75,7 @@ const Cart = () => {
                 ))}
             </div>
             <div className="cart-summary">
-                <button className="clear-cart">Clear Cart</button>
+                <button className="clear-cart" onClick={() => handleClearCart()}>Clear Cart</button>
                 <div className="cart-checkout">
                     <div className="subtotal">
                         <span>Sub Total</span>
